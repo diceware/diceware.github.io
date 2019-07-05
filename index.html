@@ -41,36 +41,58 @@
 	
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 	<script type="text/javascript" src="list.js"></script>
+	<script type="text/javascript" src="latinize.js"></script>
 	<script type="text/javascript">
-		function getRandom() {
+		function getRandom(which) {
 			var min = 0;
-			var max = dict.length - 1;
-			return Math.floor(Math.random() * (max - min) + min);
+			if (which == "w"){
+				var max = dict.length - 1;
+				return Math.floor(Math.random() * (max - min) + min);
+			}
+			if (which == "s"){
+				var max = symbols.length - 1;
+				return Math.floor(Math.random() * (max - min) + min);
+			}
+			if (which == "n"){
+				min = 1;
+				var max = 999;
+				return Math.floor(Math.random() * (max - min) + min);
+			}
 		}
         
         function generate(){
             alert("Em construção");
 			$("#options").hide();
 			var words = parseInt($("#words").val(), 10);
+			
 			var length = parseInt($("#length").val(), 10);
+			
 			var separator = $("#separator").val();
 			if (separator.length == 0) separator = " ";
 			var randomSeparator = $("#randomSep").is(':checked');
-			var accent = $("#accents").is(':checked');
+			if (randomSeparator){
+				var idx = getRandom("s");
+				separator = symbols[idx] 
+			}	
+			var removeAccents = $("#accents").is(':checked');
+			
 			var digits = $("#digits").is(':checked');
+			
 			var casing = $("input:radio[name ='case']:checked").val();
 			
 			for (var i = 1;i <= 3; i++){
 				var passwd = "";
 				for (var j = 1;j <= words; j++){
-					var idx = getRandom();
+					var idx = getRandom("w");
 					var word = dict[idx] 
 					while (word.length < length){
-						idx = getRandom();
+						idx = getRandom("w");
 						word = dict[idx] 
-					}
+					}		
+					if (removeAccents) word = word.latinize();			
 					passwd += word + (j == words?"":separator);
 				}
+				if (digits) passwd += separator + getRandom("n");
 				$("#output" + i).text(passwd);
 			}
 			$("#options").show();
