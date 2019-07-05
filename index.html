@@ -1,0 +1,82 @@
+<html>
+<head>
+	<meta name="robots" content="follow">
+	<title>Diceware</title>
+	<base target="_blank">
+  	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css" />
+  	<style type="text/css">
+		body{
+			font-family: verdana;
+		}
+        table,tr,td{
+            font-size: small;
+        }
+		#title{
+			font-size: x-large;
+		}
+		input,textarea{
+			font-family: verdana;
+			font-size: large;
+		}    
+        input[type=number]{
+            width: 40px;
+        }
+        input[type=text]{
+            width: 30px;
+        }
+        /*mobile*/
+		@media only screen 
+		  and (min-device-width: 320px) 
+		  and (max-device-width: 480px)
+		  and (-webkit-min-device-pixel-ratio: 2) {
+			#loading, #rows{
+				display:none;
+			}
+			#title{
+				font-size: medium;
+			}
+		}		
+	</style>	
+	
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript">
+		function load()
+		{
+		}
+        function generate(){
+            alert("Em construção");
+        }
+		function toClip(){
+			document.getElementById("txtShort").select();
+			document.execCommand("copy");
+		}
+		window.onload= load;
+	</script>
+	
+</head>
+<body>
+	<h1 id="title">Diceware <i style="font-weight:bold;" class="fas fa-dice"></i></h1>
+    
+    <label for="words">Quantas palavras?</label> 
+    <input type="number" id="words" name="words" value="6" placeholder="palavras" min="3" max="20" /><br /><br/>
+    
+    <label for="length">Tamanho das palavras?</label> 
+    <input type="number" id="length" name="length" value="5"  placeholder="tamanho" min="3" max="15" /><br /><br/>
+
+    <label>Formato das palavras?</label> 
+    <input type="radio" id="uppercase" name="case" />MAIÚSCULAS
+    <input type="radio" id="lowercase" name="case" checked="checked"/>minúsculas
+    <input type="radio" id="titlecase" name="case" />Primeira Maiúscula<br/><br/>
+    
+    <label for="separator">Separador das palavras</label> 
+    <input type="text" id="separator" name="separator" value="" maxlength="1" /><br /><br/>
+
+    <input type="checkbox" id="accents" checked="checked" />Remover acentos<br/><br />
+    
+    <input type="checkbox" id="digits" checked="checked" />Terminar com números?<br/><br />
+
+    <input type="button" id="sbmt" value="Gerar" onclick="generate();" />
+    
+    <div id="output"></div>
+</body>
+</html>
