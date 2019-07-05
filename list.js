@@ -1,4 +1,4 @@
-var words = [
+var dict = [
 "a",
 "aba",
 "abacate",
