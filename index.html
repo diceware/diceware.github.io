@@ -4,13 +4,6 @@
 	<title>Diceware</title>
 	<base target="_blank">
   	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css" />
-	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-	<script>
-  		(adsbygoogle = window.adsbygoogle || []).push({
-    		google_ad_client: "ca-pub-8202170394055144",
-    		enable_page_level_ads: true
-  		});
-	</script>
   	<style type="text/css">
 		body{
 			font-family: verdana;
@@ -46,8 +39,16 @@
 
 	</style>	
 	
+	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<script>
+  		(adsbygoogle = window.adsbygoogle || []).push({
+    		google_ad_client: "ca-pub-8202170394055144",
+    		enable_page_level_ads: true
+  		});
+	</script>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 	<script type="text/javascript" src="list.js"></script>
+	<script type="text/javascript" src="case.js"></script>
 	<script type="text/javascript" src="latinize.js"></script>
 	<script type="text/javascript">
 		function getRandom(which) {
@@ -68,7 +69,6 @@
 		}
         
         function generate(){
-            alert("Em construção");
 			$("#options").hide();
 			var words = parseInt($("#words").val(), 10);
 			
@@ -96,7 +96,10 @@
 						idx = getRandom("w");
 						word = dict[idx] 
 					}		
-					if (removeAccents) word = word.latinize();			
+					if (removeAccents) word = word.latinize();
+					
+					word = toProperCase(word, casing);
+
 					passwd += word + (j == words?"":separator);
 				}
 				if (digits) passwd += separator + getRandom("n");
@@ -105,6 +108,21 @@
 			$("#options").show();
         }
 		
+		function toProperCase(passwd, casing){
+			if (casing == "uppercase"){
+				passwd = toUpperCase(passwd);
+			}
+			else{
+				if (casing == "lowercase"){
+					passwd = toLowerCase(passwd);
+				}
+				else{
+					passwd = toTitleCase(passwd);							
+				}
+			}
+			return passwd;
+		}
+
 		function toClip(){
 			document.getElementById("txtShort").select();
 			document.execCommand("copy");
