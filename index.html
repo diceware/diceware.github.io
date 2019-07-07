@@ -6,6 +6,7 @@
   	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css" />
   	<style type="text/css">
 		body{
+			margin:5%;
 			font-family: verdana;
 		}
         table,tr,td{
@@ -24,6 +25,11 @@
         input[type=text]{
             width: 30px;
         }
+        fieldset>input[type=text]{
+            width: 500px;
+			font-size: medium;
+			border: none;
+        }
 		.pwd{
 			font-weight: bold;
 		}
@@ -32,11 +38,13 @@
 		}
 		fieldset {
 			padding:10px;
-			width:65%;
+			width:75%;
 			line-height:1.8;
 			overflow: auto;
 		}
-
+		i[title="copiar"]{
+			cursor: hand;
+		}
 	</style>	
 	
 	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -103,7 +111,7 @@
 					passwd += word + (j == words?"":separator);
 				}
 				if (digits) passwd += separator + getRandom("n");
-				$("#output" + i).text(passwd);
+				$("#output" + i).val(passwd);
 			}
 			$("#options").show();
         }
@@ -123,9 +131,10 @@
 			return passwd;
 		}
 
-		function toClip(){
-			document.getElementById("txtShort").select();
+		function toClip(which){
+			$("#output" + which).select();
 			document.execCommand("copy");
+			document.getSelection().removeAllRanges();
 		}
 	</script>
 	
@@ -155,9 +164,9 @@
     
 	<fieldset width="50%" id="options">
 		<legend>Opções</legend>
-		<div id="output1" class="pwd"></div>
-		<div id="output2" class="pwd"></div>
-		<div id="output3" class="pwd"></div>
+		<input type="text" id="output1"></input>&nbsp;<i class="far fa-copy" title="copiar" onclick="toClip(1);"></i><br/>
+		<input type="text" id="output2"></input>&nbsp;<i class="far fa-copy" title="copiar" onclick="toClip(2);"></i><br/>
+		<input type="text" id="output3"></input>&nbsp;<i class="far fa-copy" title="copiar" onclick="toClip(3);"></i>
 	</fieldset>
 
     <p>
