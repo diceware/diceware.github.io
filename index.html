@@ -46,14 +46,6 @@
 			cursor: hand;
 		}
 	</style>	
-	
-	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-	<script>
-  		(adsbygoogle = window.adsbygoogle || []).push({
-    		google_ad_client: "ca-pub-8202170394055144",
-    		enable_page_level_ads: true
-  		});
-	</script>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 	<script type="text/javascript" src="list.js"></script>
 	<script type="text/javascript" src="case.js"></script>
@@ -63,11 +55,11 @@
 			var min = 0;
 			if (which == "w"){
 				var max = dict.length - 1;
-				return Math.floor(Math.random() * (max - min) + min);
+				return dict[Math.floor(Math.random() * (max - min) + min)];
 			}
 			if (which == "s"){
 				var max = symbols.length - 1;
-				return Math.floor(Math.random() * (max - min) + min);
+				return symbols[Math.floor(Math.random() * (max - min) + min)];
 			}
 			if (which == "n"){
 				min = 1;
@@ -86,8 +78,7 @@
 			if (separator.length == 0) separator = " ";
 			var randomSeparator = $("#randomSep").is(':checked');
 			if (randomSeparator){
-				var idx = getRandom("s");
-				separator = symbols[idx] 
+				separator = getRandom("s");
 			}	
 			var removeAccents = $("#accents").is(':checked');
 			
@@ -98,11 +89,9 @@
 			for (var i = 1;i <= 3; i++){
 				var passwd = "";
 				for (var j = 1;j <= words; j++){
-					var idx = getRandom("w");
-					var word = dict[idx] 
+					var word = getRandom("w");
 					while (word.length < length){
-						idx = getRandom("w");
-						word = dict[idx] 
+						word = getRandom("w");
 					}		
 					if (removeAccents) word = word.latinize();
 					
