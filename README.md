@@ -6,6 +6,6 @@ Disponível em https://www.diceware.com.br
 
 --
 
-Diceware generator in braziian portuguese
+Diceware generator in brazilian portuguese
 
 Live at https://www.diceware.com.br
