@@ -13,7 +13,7 @@ function wordSpace(howManyWords){
 }
 
 function timeToGuess(howManyWords){
-    var wordSpace = Math.pow(7776,parseInt(howManyWords, 10));
+    var wordSpace = Math.pow(7776,parseInt(howManyWords, 10))/2;
     var seconds = Math.floor(wordSpace / 1000000000000);
     var minutes = Math.floor(seconds / 60);
     var hours = Math.floor(minutes / 60);
