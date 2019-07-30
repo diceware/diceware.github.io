@@ -5,15 +5,15 @@ function entropy(howManyWords, digits){
     return Math.ceil(entropyWords + entropySymbols + entropyDigits);
 }
 
-function wordSpace(howManyWords){
-    var wordSpace = Math.pow(7776,parseInt(howManyWords, 10));
+function wordSpace(howManyWords, digits){
+    var wordSpace = Math.pow(7776,parseInt(howManyWords, 10)) * (digits?999:1);
     return wordSpace.toLocaleString(
         undefined, { minimumFractionDigits: 0 }
       );
 }
 
-function timeToGuess(howManyWords){
-    var wordSpace = Math.pow(7776,parseInt(howManyWords, 10))/2;
+function timeToGuess(howManyWords, digits){
+    var wordSpace = (Math.pow(7776,parseInt(howManyWords, 10))  * (digits?999:1))/2;
     var seconds = Math.floor(wordSpace / 1000000000000);
     var minutes = Math.floor(seconds / 60);
     var hours = Math.floor(minutes / 60);
