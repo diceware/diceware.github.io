@@ -45,6 +45,7 @@
 	<script type="text/javascript" src="list.js"></script>
 	<script type="text/javascript" src="case.js"></script>
 	<script type="text/javascript" src="latinize.js"></script>
+	<script type="text/javascript" src="entropy.js"></script>
 	<script type="text/javascript">
 		function getRandom(which) {
 			var min = 0;
@@ -94,10 +95,23 @@
 
 					passwd += word + (j == words?"":separator);
 				}
-				if (digits) passwd += separator + getRandom("n");
+				if (digits){
+					passwd += separator + getRandom("n");
+				} 
 				$("#output" + i).val(passwd);
 			}
 			$("#options").show();
+
+			$("#sEntropy").html(entropy(words,digits));
+			$("#sWords").html(words);
+			$("#sWordSpace").html(wordSpace(words));
+			var ttg = timeToGuess(words);
+			var ttg_ = "- " + ttg[0] + " segundos<br/>";
+			ttg_ += "- " + ttg[1] + " minutos<br/>";
+			ttg_ += "- " + ttg[2] + " horas<br/>";
+			ttg_ += "- " + ttg[3] + " dias<br/>";
+			ttg_ += "- " + ttg[4] + " anos";
+			$("#sTimeToGuess").html(ttg_);
         }
 		
 		function toProperCase(passwd, casing){
@@ -146,12 +160,21 @@
 
     <input type="button" id="sbmt" value="Gerar" onclick="generate();" /><br/><br />
     
-	<fieldset width="50%" id="options">
+	<fieldset width="55%" id="options">
 		<legend>Opções</legend>
 		<i class="far fa-copy" title="copiar" onclick="toClip(1);"></i><input type="text" class="output" id="output1"></input><br/>
 		<i class="far fa-copy" title="copiar" onclick="toClip(2);"></i><input type="text" class="output" id="output2"></input><br/>
 		<i class="far fa-copy" title="copiar" onclick="toClip(3);"></i><input type="text" class="output" id="output3"></input>
 	</fieldset>
+
+	<p>
+		<ul>
+		<li>A entropia total destas senhas é <span id="sEntropy"></span> bits;</li>
+		<li>O total de combinações usando <span id="sWords"></span> palavras é <span id="sWordSpace"></span>;</li>
+		<li>Assumindo um ataque de força bruta de 1,000,000,000,000 palavras/segundo, investigando 50% do total de combinações, levaria o tempo de:<br />
+		<span id="sTimeToGuess"></span>.</li>
+		</ul>
+	</p>
 
     <p>
 		<hr />
