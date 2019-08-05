@@ -12,9 +12,16 @@ function wordSpace(howManyWords, digits){
       );
 }
 
-function timeToGuess(howManyWords, digits){
+function timeToGuess(howManyWords, digits, rate){
     var wordSpace = (Math.pow(7776,parseInt(howManyWords, 10))  * (digits?999:1))/2;
-    var seconds = Math.floor(wordSpace / 1000000000000);
+    var ratePerSec;
+    if (rate == "1"){
+        ratePerSec = 1000000000000;
+    }
+    else{
+        ratePerSec = 1000000000000000;
+    }
+    var seconds = Math.floor(wordSpace / ratePerSec);
     var minutes = Math.floor(seconds / 60);
     var hours = Math.floor(minutes / 60);
     var days = Math.floor(hours / 24);

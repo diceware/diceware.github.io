@@ -40,6 +40,24 @@
 			cursor: hand;
 			margin-right:15px;
 		}
+		.wrap {
+			height: auto;
+			overflow: hidden;
+			margin-left: 2%;
+		}
+
+		.right {
+			float: right;
+			width: 45%;
+			background: #aafed6;
+		}
+
+		.left {
+			float: none;
+			background: #e8f6fe;
+			width: 45%;
+			overflow: hidden;
+		}​​
 	</style>	
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 	<script type="text/javascript" src="list.js"></script>
@@ -105,13 +123,21 @@
 			$("#sEntropy").html(entropy(words, digits));
 			$("#sWords").html(words);
 			$("#sWordSpace").html(wordSpace(words, digits));
-			var ttg = timeToGuess(words, digits);
-			var ttg_ = "- " + ttg[0] + " segundos<br/>";
-			ttg_ += "- " + ttg[1] + " minutos<br/>";
-			ttg_ += "- " + ttg[2] + " horas<br/>";
-			ttg_ += "- " + ttg[3] + " dias<br/>";
-			ttg_ += "- " + ttg[4] + " anos";
-			$("#sTimeToGuess").html(ttg_);
+			var ttg = timeToGuess(words, digits, 1);
+			var ttg_ = "&bull; " + ttg[0] + " segundos<br/>";
+			ttg_ += "&bull; " + ttg[1] + " minutos<br/>";
+			ttg_ += "&bull; " + ttg[2] + " horas<br/>";
+			ttg_ += "&bull; " + ttg[3] + " dias<br/>";
+			ttg_ += "&bull; " + ttg[4] + " anos";
+			$("#sTimeToGuess1").html(ttg_);
+
+			ttg = timeToGuess(words, digits, 2);
+			ttg_ = "&bull; " + ttg[0] + " segundos<br/>";
+			ttg_ += "&bull; " + ttg[1] + " minutos<br/>";
+			ttg_ += "&bull; " + ttg[2] + " horas<br/>";
+			ttg_ += "&bull; " + ttg[3] + " dias<br/>";
+			ttg_ += "&bull; " + ttg[4] + " anos";
+			$("#sTimeToGuess2").html(ttg_);
         }
 		
 		function toProperCase(passwd, casing){
@@ -169,11 +195,22 @@
 
 	<p>
 		<ul>
-		<li>A entropia total de uma senha com <span id="sWords"></span> palavras  é <span id="sEntropy"></span> bits;</li>
-		<li>O total de combinações com esta quantidade de palavras é <span id="sWordSpace"></span> (<i>o dicionário contém 7,776 palavras</i>);</li>
-		<li>Assumindo um ataque de força bruta de 1,000,000,000,000 palavras/segundo, investigando 50% do total de combinações, demoraria o tempo para quebrar de:<br />
-		<span id="sTimeToGuess"></span>.</li>
+			<li>A entropia total de uma senha com <span id="sWords"></span> palavras  é <span id="sEntropy"></span> bits;</li>
+			<li>O total de combinações com esta quantidade de palavras é <span id="sWordSpace"></span> (<i>o dicionário contém 7,776 palavras</i>);</li>
+			<li>Tempo para quebrar sob força bruta, investigando 50% do total de combinações</li>
 		</ul>
+	</p>
+	<p>
+		<div class='wrap'>
+			<div class='right'>
+					Assumindo 1,000,000,000,000,000 palavras/segundo<br />(padrão governo, 1 quatrilhão/seg):<br />
+					<span id="sTimeToGuess2"></span>.
+			</div>
+			<div class='left'>
+					Assumindo 1,000,000,000,000 palavras/segundo<br />(padrão industrial, 1 trilhão/seg):<br />
+					<span id="sTimeToGuess1"></span>.
+			</div>
+		</div>			
 	</p>
 
     <p>
