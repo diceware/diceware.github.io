@@ -91,12 +91,7 @@
 			var words = parseInt($("#words").val(), 10);
 			
 			var length = parseInt($("#length").val(), 10);
-			
-			if (length > 10){
-				alert("Nao ha palavras tao grandes :)");
-				return;
-			}	
-		
+					
 			var separator = $("#separator").val();
 			if (separator.length == 0) separator = " ";
 			var randomSeparator = $("#randomSep").is(':checked');
@@ -110,6 +105,15 @@
 			var casing = $("input:radio[name ='case']:checked").val();
 		
 			var language = $("input:radio[name ='lang']:checked").val();
+			
+			if (length > 8 && language == "pt"){
+				alert("Nao ha palavras tao grandes :)");
+				return;
+			}	
+			if (length > 6 && language == "en"){
+				alert("Nao ha palavras tao grandes :)");
+				return;
+			}	
 			
 			for (var i = 1;i <= 3; i++){
 				var passwd = "";
