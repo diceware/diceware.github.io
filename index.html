@@ -104,6 +104,8 @@
 			var digits = $("#digits").is(':checked');
 			
 			var casing = $("input:radio[name ='case']:checked").val();
+		
+			var language = $("input:radio[name ='lang']:checked").val();
 			
 			for (var i = 1;i <= 3; i++){
 				var passwd = "";
@@ -182,6 +184,10 @@
     <input type="radio" value="lowercase" name="case" checked="checked"/>minúsculas
     <input type="radio" value="titlecase" name="case" />Primeira Maiúscula<br/><br/>
     
+    <label>Idioma das palavras?</label> 
+    <input type="radio" value="pt" name="lang" checked="checked" />Português
+    <input type="radio" value="en" name="lang"/>Inglês<br/><br/>
+
     <label for="separator">Separador das palavras (padrão: espaço)</label> 
     <input type="text" id="separator" name="separator" value="" maxlength="1" /><input type="checkbox" id="randomSep" />Aleatório<br /><br/>
 
