@@ -88,6 +88,11 @@
 			
 			var length = parseInt($("#length").val(), 10);
 			
+			if (length > 10){
+				alert("Nao ha palavras tao grandes :)");
+				return;
+			}	
+		
 			var separator = $("#separator").val();
 			if (separator.length == 0) separator = " ";
 			var randomSeparator = $("#randomSep").is(':checked');
