@@ -65,11 +65,15 @@
 	<script type="text/javascript" src="latinize.js"></script>
 	<script type="text/javascript" src="entropy.js?1"></script>
 	<script type="text/javascript">
-		function getRandom(which) {
+		function getRandom(which, language) {
 			var min = 0;
+			var dict_ = dict;
+			if (language == "en"){
+				dict_ = dictEn;
+			}
 			if (which == "w"){
-				var max = dict.length - 1;
-				return dict[Math.floor(Math.random() * (max - min) + min)];
+				var max = dict_.length - 1;
+				return dict_[Math.floor(Math.random() * (max - min) + min)];
 			}
 			if (which == "s"){
 				var max = symbols.length - 1;
@@ -110,9 +114,9 @@
 			for (var i = 1;i <= 3; i++){
 				var passwd = "";
 				for (var j = 1;j <= words; j++){
-					var word = getRandom("w");
+					var word = getRandom("w",language);
 					while (word.length < length){
-						word = getRandom("w");
+						word = getRandom("w",language);
 					}		
 					if (removeAccents) word = word.latinize();
 					
@@ -121,7 +125,7 @@
 					passwd += word + (j == words?"":separator);
 				}
 				if (digits){
-					passwd += separator + getRandom("n");
+					passwd += separator + getRandom("n",language);
 				} 
 				$("#output" + i).val(passwd);
 			}
