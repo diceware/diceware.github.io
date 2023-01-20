@@ -15,7 +15,7 @@ function wordSpace(words, howManyWords, digits, symbolAtEnd, separators){
 }
 
 function timeToGuess(words, howManyWords, digits, symbolAtEnd, separators, rate){
-    var wordSpace_ = Math.pow(words, parseInt(howManyWords, 10)) * (digits?999:1) * (symbolAtEnd?24:1) * (separators?24*(howManyWords - 1):1);
+    var wordSpace_ = Math.pow(words, parseInt(howManyWords, 10)) * (digits?999:1) * (symbolAtEnd?24:1) * (separators?24*(howManyWords - 1):1)/2;
     var ratePerSec;
     if (rate == "1"){
         ratePerSec = 1000000000000;
