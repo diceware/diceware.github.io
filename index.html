@@ -71,6 +71,9 @@
 			if (language == "en"){
 				dict_ = dictEn;
 			}
+			if (language == "du"){
+				dict_ = dictDu;
+			}
 			if (which == "w"){
 				var max = dict_.length - 1;
 				return dict_[Math.floor(Math.random() * (max - min) + min)];
@@ -101,7 +104,12 @@
 			var removeAccents = $("#accents").is(':checked');
 			
 			var digits = $("#digits").is(':checked');
-			
+
+			var symbol = "";
+			var endSymbol = $("#endsymbol").is(':checked');
+			if (endSymbol){
+				symbol = getRandom("s");
+			}				
 			var casing = $("input:radio[name ='case']:checked").val();
 		
 			var language = $("input:radio[name ='lang']:checked").val();
@@ -131,6 +139,7 @@
 				if (digits){
 					passwd += separator + getRandom("n",language);
 				} 
+				passwd += symbol;
 				$("#output" + i).val(passwd);
 			}
 			$("#options").show();
@@ -193,15 +202,18 @@
     <input type="radio" value="titlecase" name="case" />Primeira Maiúscula<br/><br/>
     
     <label>Idioma das palavras?</label> 
-    <input type="radio" value="pt" name="lang" checked="checked" />Português
-    <input type="radio" value="en" name="lang"/>Inglês<br/><br/>
+    <input type="radio" value="pt" name="lang" />Português
+    <input type="radio" value="en" name="lang"/>English<br/><br/>
+    <input type="radio" value="du" name="lang" checked="checked"/>Dutch<br/><br/>
 
     <label for="separator">Separador das palavras (padrão: espaço)</label> 
     <input type="text" id="separator" name="separator" value="" maxlength="1" /><input type="checkbox" id="randomSep" />Aleatório<br /><br/>
 
     <input type="checkbox" id="accents" checked="checked" />Remover acentos?
     
-    <input type="checkbox" id="digits" />Terminar com números?<br/><br />
+    <input type="checkbox" id="digits" checked="checked" />Terminar com números?<br/><br />
+
+	<input type="checkbox" id="endsymbol" checked="checked" />Terminar com símbolo?<br/><br />
 
     <input type="button" id="sbmt" value="Gerar" onclick="generate();" /><br/><br />
     
