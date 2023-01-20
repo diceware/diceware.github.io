@@ -24,7 +24,7 @@ var symbols = [
     ".",
     "?"];
                 
-    var dict = [
+    var dictPt = [
     "a",
     "aba",
     "abacate",
