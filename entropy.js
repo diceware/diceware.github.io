@@ -5,8 +5,8 @@ function entropy(howManyWords, digits){
     return Math.ceil(entropyWords + entropySymbols + entropyDigits);
 }
 
-function wordSpace(howManyWords, digits){
-    var wordSpace = Math.pow(7776,parseInt(howManyWords, 10)) * (digits?999:1);
+function wordSpace(words, howManyWords, digits){
+    var wordSpace = Math.pow(words, parseInt(howManyWords, 10)) * (digits?999:1);
     return wordSpace.toLocaleString(
         undefined, { minimumFractionDigits: 0 }
       );

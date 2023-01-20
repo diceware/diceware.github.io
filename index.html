@@ -150,7 +150,7 @@
 			$("#sEntropy").html(entropy(words, digits));
 			$("#sWords").html(words);
 			$("#sDictLen").html(dict_.length);
-			$("#sWordSpace").html(wordSpace(words, digits));
+			$("#sWordSpace").html(wordSpace(dict_.length, words, digits));
 			var ttg = timeToGuess(words, digits, 1);
 			var ttg_ = "&bull; " + ttg[0] + " segundos<br/>";
 			ttg_ += "&bull; " + ttg[1] + " minutos<br/>";
