@@ -5,15 +5,17 @@ function entropy(howManyWords, digits){
     return Math.ceil(entropyWords + entropySymbols + entropyDigits);
 }
 
-function wordSpace(words, howManyWords, digits){
-    var wordSpace = Math.pow(words, parseInt(howManyWords, 10)) * (digits?999:1);
+function wordSpace(words, howManyWords, digits, symbolAtEnd, separators){
+    console.log(separators);
+    console.log(symbolAtEnd);
+    var wordSpace = Math.pow(words, parseInt(howManyWords, 10)) * (digits?999:1) * (symbolAtEnd?24:1) * (separators?24*(howManyWords - 1):1);
     return wordSpace.toLocaleString(
         undefined, { minimumFractionDigits: 0 }
       );
 }
 
-function timeToGuess(howManyWords, digits, rate){
-    var wordSpace = (Math.pow(7776,parseInt(howManyWords, 10))  * (digits?999:1))/2;
+function timeToGuess(words, howManyWords, digits, symbolAtEnd, separators, rate){
+    var wordSpace_ = Math.pow(words, parseInt(howManyWords, 10)) * (digits?999:1) * (symbolAtEnd?24:1) * (separators?24*(howManyWords - 1):1);
     var ratePerSec;
     if (rate == "1"){
         ratePerSec = 1000000000000;
@@ -21,7 +23,7 @@ function timeToGuess(howManyWords, digits, rate){
     else{
         ratePerSec = 1000000000000000;
     }
-    var seconds = Math.floor(wordSpace / ratePerSec);
+    var seconds = Math.floor(wordSpace_ / ratePerSec);
     var minutes = Math.floor(seconds / 60);
     var hours = Math.floor(minutes / 60);
     var days = Math.floor(hours / 24);
