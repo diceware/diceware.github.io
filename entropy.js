@@ -5,17 +5,22 @@ function entropy(howManyWords, digits){
     return Math.ceil(entropyWords + entropySymbols + entropyDigits);
 }
 
-function wordSpace(words, howManyWords, digits, symbolAtEnd, separators){
-    console.log(separators);
-    console.log(symbolAtEnd);
-    var wordSpace = Math.pow(words, parseInt(howManyWords, 10)) * (digits?999:1) * (symbolAtEnd?24:1) * (separators?24*(howManyWords - 1):1);
+function wordSpace(words, howManyWords, digits, symbolAtEnd, separators, casing){
+    var howManyWords_ = howManyWords;
+    if (casing != "lowercase"){
+        howManyWords_ *= 3;
+    }
+    var wordSpace = Math.pow(words, parseInt(howManyWords_, 10)) * (digits?999:1) * (symbolAtEnd?24:1) * (separators?24*(howManyWords - 1):1);
     return wordSpace.toLocaleString(
         undefined, { minimumFractionDigits: 0 }
       );
 }
 
-function timeToGuess(words, howManyWords, digits, symbolAtEnd, separators, rate){
-    var wordSpace_ = Math.pow(words, parseInt(howManyWords, 10)) * (digits?999:1) * (symbolAtEnd?24:1) * (separators?24*(howManyWords - 1):1)/2;
+function timeToGuess(words, howManyWords, digits, symbolAtEnd, separators, casing, rate){
+    var howManyWords_ = howManyWords;
+    if (casing != "lowercase"){
+        howManyWords_ *= 3;
+    }    var wordSpace_ = Math.pow(words, parseInt(howManyWords_, 10)) * (digits?999:1) * (symbolAtEnd?24:1) * (separators?24*(howManyWords - 1):1)/2;
     var ratePerSec;
     if (rate == "1"){
         ratePerSec = 1000000000000;

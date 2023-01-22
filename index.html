@@ -150,8 +150,8 @@
 			$("#sEntropy").html(entropy(words, digits));
 			$("#sWords").html(words);
 			$("#sDictLen").html(dict_.length);
-			$("#sWordSpace").html(wordSpace(dict_.length, words, digits, endSymbol, (separator != " ")));
-			var ttg = timeToGuess(dict_.length, words, digits, endSymbol, (separator != " "), 1);
+			$("#sWordSpace").html(wordSpace(dict_.length, words, digits, endSymbol, (separator != " "), casing));
+			var ttg = timeToGuess(dict_.length, words, digits, endSymbol, (separator != " "), casing, 1);
 			var ttg_ = "&bull; " + ttg[0] + " segundos<br/>";
 			ttg_ += "&bull; " + ttg[1] + " minutos<br/>";
 			ttg_ += "&bull; " + ttg[2] + " horas<br/>";
@@ -159,7 +159,7 @@
 			ttg_ += "&bull; " + ttg[4] + " anos";
 			$("#sTimeToGuess1").html(ttg_);
 
-			ttg = timeToGuess(dict_.length, words, digits, endSymbol, (separator != " "), 2);
+			ttg = timeToGuess(dict_.length, words, digits, endSymbol, (separator != " "), casing, 2);
 			ttg_ = "&bull; " + ttg[0] + " segundos<br/>";
 			ttg_ += "&bull; " + ttg[1] + " minutos<br/>";
 			ttg_ += "&bull; " + ttg[2] + " horas<br/>";
