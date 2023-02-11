@@ -1,0 +1,66 @@
+body{
+    font-family: verdana;
+}
+#title{
+    font-size: x-large;
+}
+input,textarea{
+    font-family: verdana;
+    font-size: large;
+}    
+input[type=number]{
+    width: 40px;
+}
+input[type=text]{
+    width: 30px;
+}
+input[type=text].output{
+    width: 750px;
+    font-size: medium;
+    border: none;
+}
+#options{
+    display: none;
+}
+fieldset {
+    padding:10px;
+    width:55%;
+    line-height:1.8;
+    overflow: auto;
+}
+i[title="copiar"]{
+    cursor: hand;
+    margin-right:15px;
+}
+.wrap {
+    height: auto;
+    overflow: hidden;
+    margin-left: 2%;
+}
+
+.right {
+    float: right;
+    width: 45%;
+    background: #aafed6;
+}
+
+.left {
+    float: none;
+    background: #e8f6fe;
+    width: 45%;
+    overflow: hidden;
+}
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px){
+    /* mobile */
+    section{
+        display: none;
+    }
+
+    input[type=text].output{
+        width: 900px;
+        font-size:22px;
+        border: 1px solid black;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }}   
