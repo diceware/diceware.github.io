@@ -53,6 +53,11 @@ i[title="copiar"]{
     overflow: hidden;
 }
 
+.welcome {
+    background: #b80000;
+    color: #fff;
+}
+
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px){
     /* mobile */
     section{
