@@ -1,242 +1,241 @@
 <html>
 <head>
-	<meta name="robots" content="follow">
-	<title>Diceware</title>
-	<base target="_blank">
-  	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css" />
-  	<link rel="stylesheet" href="main.css" />
-	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-	<script type="text/javascript" src="list.js"></script>
-	<script type="text/javascript" src="case.js"></script>
-	<script type="text/javascript" src="latinize.js"></script>
-	<script type="text/javascript" src="entropy.js?1"></script>
-	<script type="text/javascript">
-		var dict_ = dictPt;
-		function getRandom(which, language) {
-			var min = 0;
-			if (language == "pt"){
-				dict_ = dictPt;
-			}
-			if (language == "en"){
-				dict_ = dictEn;
-			}
-			if (language == "du"){
-				dict_ = dictDu;
-			}
-			if (which == "w"){
-				var max = dict_.length - 1;
-				return dict_[Math.floor(Math.random() * (max - min) + min)];
-			}
-			if (which == "s"){
-				var max = symbols.length - 1;
-				return symbols[Math.floor(Math.random() * (max - min) + min)];
-			}
-			if (which == "n"){
-				min = 1;
-				var max = 999;
-				return Math.floor(Math.random() * (max - min) + min);
-			}
-		}
+    <meta name="robots" content="follow">
+    <title>Diceware</title>
+    <base target="_blank">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css" />
+      <link rel="stylesheet" href="main.css" />
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="list.js"></script>
+    <script type="text/javascript" src="case.js"></script>
+    <script type="text/javascript" src="latinize.js"></script>
+    <script type="text/javascript" src="entropy.js?1"></script>
+    <script type="text/javascript">
+        var dict_ = dictPt;
+        function getRandom(which, language) {
+            var min = 0;
+            if (language == "pt"){
+                dict_ = dictPt;
+            }
+            if (language == "en"){
+                dict_ = dictEn;
+            }
+            if (language == "du"){
+                dict_ = dictDu;
+            }
+            if (which == "w"){
+                var max = dict_.length - 1;
+                return dict_[Math.floor(Math.random() * (max - min) + min)];
+            }
+            if (which == "s"){
+                var max = symbols.length - 1;
+                return symbols[Math.floor(Math.random() * (max - min) + min)];
+            }
+            if (which == "n"){
+                min = 1;
+                var max = 999;
+                return Math.floor(Math.random() * (max - min) + min);
+            }
+        }
         
         function generate(){
-			$("#options").hide();
-			var words = parseInt($("#words").val(), 10);
-			
-			var length = parseInt($("#length").val(), 10);
-					
-			var separator = $("#separator").val();
-			if (separator.length == 0) separator = " ";
-			var randomSeparator = $("#randomSep").is(':checked');
-			if (randomSeparator){
-				separator = getRandom("s");
-			}	
-			var removeAccents = $("#accents").is(':checked');
-			
-			var digits = $("#digits").is(':checked');
+            $("#options").hide();
+            var words = parseInt($("#words").val(), 10);
+            
+            var length = parseInt($("#length").val(), 10);
+                    
+            var separator = $("#separator").val();
+            if (separator.length == 0) separator = " ";
+            var randomSeparator = $("#randomSep").is(':checked');
+            if (randomSeparator){
+                separator = getRandom("s");
+            }    
+            var removeAccents = $("#accents").is(':checked');
+            
+            var digits = $("#digits").is(':checked');
 
-			var symbol = "";
-			var endSymbol = $("#endsymbol").is(':checked');
-			if (endSymbol){
-				symbol = getRandom("s");
-			}				
-			var casing = $("input:radio[name ='case']:checked").val();
-		
-			var language = $("input:radio[name ='lang']:checked").val();
-			
-			if (length > 8 && language == "pt"){
-				alert("Nao ha palavras tao grandes :)");
-				return;
-			}	
-			if (length > 6 && language == "en"){
-				alert("Nao ha palavras tao grandes :)");
-				return;
-			}	
-			
-			for (var i = 1;i <= 3; i++){
-				var passwd = "";
-				for (var j = 1;j <= words; j++){
-					var word = getRandom("w",language);
-					while (word.length < length){
-						word = getRandom("w",language);
-					}		
-					if (removeAccents) word = word.latinize();
-					word = word.replace("'","").replace("\"","");
-					word = toProperCase(word, casing);
+            var symbol = "";
+            var endSymbol = $("#endsymbol").is(':checked');
+            if (endSymbol){
+                symbol = getRandom("s");
+            }                
+            var casing = $("input:radio[name ='case']:checked").val();
+        
+            var language = $("input:radio[name ='lang']:checked").val();
+            
+            if (length > 8 && language == "pt"){
+                alert("Nao ha palavras tao grandes :)");
+                return;
+            }    
+            if (length > 6 && language == "en"){
+                alert("Nao ha palavras tao grandes :)");
+                return;
+            }    
+            
+            for (var i = 1;i <= 3; i++){
+                var passwd = "";
+                for (var j = 1;j <= words; j++){
+                    var word = getRandom("w",language);
+                    while (word.length < length){
+                        word = getRandom("w",language);
+                    }        
+                    if (removeAccents) word = word.latinize();
+                    word = word.replace("'","").replace("\"","");
+                    word = toProperCase(word, casing);
 
-					passwd += word + (j == words?"":separator);
-				}
-				if (digits){
-					passwd += separator + getRandom("n",language);
-				} 
-				passwd += symbol;
-				$("#output" + i).val(passwd);
-			}
-			$("#options").show();
+                    passwd += word + (j == words?"":separator);
+                }
+                if (digits){
+                    passwd += separator + getRandom("n",language);
+                } 
+                passwd += symbol;
+                $("#output" + i).val(passwd);
+            }
+            $("#options").show();
 
-			$("#sEntropy").html(entropy(words, digits));
-			$("#sWords").html(words);
-			$("#sDictLen").html(dict_.length);
-			$("#sWordSpace").html(wordSpace(dict_.length, words, digits, endSymbol, (separator != " "), casing));
-			var ttg = timeToGuess(dict_.length, words, digits, endSymbol, (separator != " "), casing, 1);
-			var ttg_ = "&bull; " + ttg[0] + " segundos<br/>";
-			ttg_ += "&bull; " + ttg[1] + " minutos<br/>";
-			ttg_ += "&bull; " + ttg[2] + " horas<br/>";
-			ttg_ += "&bull; " + ttg[3] + " dias<br/>";
-			ttg_ += "&bull; " + ttg[4] + " anos";
-			$("#sTimeToGuess1").html(ttg_);
+            $("#sEntropy").html(entropy(words, digits));
+            $("#sWords").html(words);
+            $("#sDictLen").html(dict_.length);
+            $("#sWordSpace").html(wordSpace(dict_.length, words, digits, endSymbol, (separator != " "), casing));
+            var ttg = timeToGuess(dict_.length, words, digits, endSymbol, (separator != " "), casing, 1);
+            var ttg_ = "&bull; " + ttg[0] + " segundos<br/>";
+            ttg_ += "&bull; " + ttg[1] + " minutos<br/>";
+            ttg_ += "&bull; " + ttg[2] + " horas<br/>";
+            ttg_ += "&bull; " + ttg[3] + " dias<br/>";
+            ttg_ += "&bull; " + ttg[4] + " anos";
+            $("#sTimeToGuess1").html(ttg_);
 
-			ttg = timeToGuess(dict_.length, words, digits, endSymbol, (separator != " "), casing, 2);
-			ttg_ = "&bull; " + ttg[0] + " segundos<br/>";
-			ttg_ += "&bull; " + ttg[1] + " minutos<br/>";
-			ttg_ += "&bull; " + ttg[2] + " horas<br/>";
-			ttg_ += "&bull; " + ttg[3] + " dias<br/>";
-			ttg_ += "&bull; " + ttg[4] + " anos";
-			$("#sTimeToGuess2").html(ttg_);
+            ttg = timeToGuess(dict_.length, words, digits, endSymbol, (separator != " "), casing, 2);
+            ttg_ = "&bull; " + ttg[0] + " segundos<br/>";
+            ttg_ += "&bull; " + ttg[1] + " minutos<br/>";
+            ttg_ += "&bull; " + ttg[2] + " horas<br/>";
+            ttg_ += "&bull; " + ttg[3] + " dias<br/>";
+            ttg_ += "&bull; " + ttg[4] + " anos";
+            $("#sTimeToGuess2").html(ttg_);
         }
-		
-		function toProperCase(passwd, casing){
-			if (casing == "uppercase"){
-				passwd = toUpperCase(passwd);
-			}
-			else{
-				if (casing == "lowercase"){
-					passwd = toLowerCase(passwd);
-				}
-				else{
-					if (casing == "titlecase"){
-						passwd = toTitleCase(passwd);
-					}
-					else{
-						var letterUpper = Math.floor(Math.random() * (passwd.length - 1));
-						if (letterUpper == 0){
-							passwd = toTitleCase(passwd);
-						}
-						else{
-							passwd = toLowerCase(passwd.substring(0,letterUpper)) + toUpperCase(passwd[letterUpper]) + toLowerCase(passwd.substring(letterUpper + 1));		
-						}					
-					}
-				}
-			}
-			return passwd;
-		}
+        
+        function toProperCase(passwd, casing){
+            if (casing == "uppercase"){
+                passwd = toUpperCase(passwd);
+            }
+            else{
+                if (casing == "lowercase"){
+                    passwd = toLowerCase(passwd);
+                }
+                else{
+                    if (casing == "titlecase"){
+                        passwd = toTitleCase(passwd);
+                    }
+                    else{
+                        var letterUpper = Math.floor(Math.random() * (passwd.length - 1));
+                        if (letterUpper == 0){
+                            passwd = toTitleCase(passwd);
+                        }
+                        else{
+                            passwd = toLowerCase(passwd.substring(0,letterUpper)) + toUpperCase(passwd[letterUpper]) + toLowerCase(passwd.substring(letterUpper + 1));        
+                        }                    
+                    }
+                }
+            }
+            return passwd;
+        }
 
-		function showNotification({top = 0, right = 0, className, html}) {
-			let notification = document.createElement('div');
-			notification.className = "notification";
-			if (className) {
-			notification.classList.add(className);
-			}
+        function showNotification({top = 0, right = 0, className, html}) {
+            let notification = document.createElement('div');
+            notification.className = "notification";
+            if (className) {
+            notification.classList.add(className);
+            }
 
-			notification.style.top = top + 'px';
-			notification.style.right = right + 'px';
+            notification.style.top = top + 'px';
+            notification.style.right = right + 'px';
 
-			notification.innerHTML = html;
-			document.body.append(notification);
+            notification.innerHTML = html;
+            document.body.append(notification);
 
-			setTimeout(() => notification.remove(), 1500);
-		}
+            setTimeout(() => notification.remove(), 1500);
+        }
 
-		function toClip(which){
-			$("#output" + which).select();
-			document.execCommand("copy");
-			document.getSelection().removeAllRanges();
-			showNotification({
-        		top: 10,
-        		right: 10,
-        		html: "Copied!",
-        		className: "welcome"
-      		});
-		}
+        function toClip(which){
+            $("#output" + which).select();
+            document.execCommand("copy");
+            document.getSelection().removeAllRanges();
+            showNotification({
+                top: 10,
+                right: 10,
+                html: "Copied!",
+                className: "welcome"
+            });
+        }
 
 
-	</script>
-	
+    </script>
+    
 </head>
 <body onload="javascript:generate();">
-	<h1>Diceware <i style="font-weight:bold;" class="fas fa-dice"></i></h1>
-	
-    <label for="words">Quantas palavras?</label> 
-    <input type="number" id="words" name="words" value="6" placeholder="palavras" min="3" max="20" />
+    <h1>Diceware <i style="font-weight:bold;" class="fas fa-dice"></i></h1>
     
-    <label for="length">Tamanho mínimo das palavras?</label> 
-    <input type="number" id="length" name="length" value="5"  placeholder="tamanho" min="3" max="15" /><br /><br/>
-
-    <label>Formato das palavras?</label> 
-    <input type="radio" value="uppercase" name="case" />MAIÚSCULAS
-    <input type="radio" value="lowercase" name="case"/>minúsculas
+    <label for="words">How many words?</label>
+    <input type="number" id="words" name="words" value="6" placeholder="words" min="3" max="20" />
+    
+    <label for="length">Minimum word length?</label>
+    <input type="number" id="length" name="length" value="5"  placeholder="length" min="3" max="15" /><br /><br/>
+    
+    <label>Word format?</label>
+    <input type="radio" value="uppercase" name="case" />UPPERCASE
+    <input type="radio" value="lowercase" name="case"/>lowercase
     <input type="radio" value="randomcase" name="case" checked="checked"/>rAndoM
-    <input type="radio" value="titlecase" name="case" />Primeira Maiúscula<br/><br/>
+    <input type="radio" value="titlecase" name="case" />Title Case<br/><br/>
     
-    <label>Idioma das palavras?</label> 
-    <input type="radio" value="pt" name="lang" />Português
+    <label>Word language?</label>
+    <input type="radio" value="pt" name="lang" />Portuguese
     <input type="radio" value="en" name="lang"/>English
     <input type="radio" value="du" name="lang" checked="checked"/>Dutch<br/><br/>
-
-    <label for="separator">Separador das palavras (padrão: espaço)</label> 
-    <input type="text" id="separator" name="separator" value="" maxlength="1" /><input type="checkbox" id="randomSep" />Aleatório<br /><br/>
-
-    <input type="checkbox" id="accents" checked="checked" />Remover acentos?
     
-    <input type="checkbox" id="digits" checked="checked" />Terminar com números?
-
-	<input type="checkbox" id="endsymbol" checked="checked" />Terminar com símbolo?<br/><br />
-
-    <input type="button" id="sbmt" value="Gerar" onclick="generate();" /><br/><br />
+    <label for="separator">Word separator (default: space)</label>
+    <input type="text" id="separator" name="separator" value="" maxlength="1" /><input type="checkbox" id="randomSep" />Random<br /><br/>
     
-	<fieldset width="55%" id="options">
-		<legend>Opções</legend>
-		<i class="far fa-copy" title="copiar" onclick="toClip(1);"></i><input type="text" class="output" id="output1"></input><br/>
-		<i class="far fa-copy" title="copiar" onclick="toClip(2);"></i><input type="text" class="output" id="output2"></input><br/>
-		<i class="far fa-copy" title="copiar" onclick="toClip(3);"></i><input type="text" class="output" id="output3"></input>
-	</fieldset>
-
-	<section id="info">
-		<p>
-			<ul>
-				<li>A entropia total de uma senha com <span id="sWords"></span> palavras  é <span id="sEntropy"></span> bits;</li>
-				<li>O total de combinações com esta quantidade de palavras é <span id="sWordSpace"></span> (<i>o dicionário contém <span id="sDictLen"></span> palavras</i>);</li>
-				<li>Tempo para quebrar sob força bruta, investigando 50% do total de combinações</li>
-			</ul>
-		</p>
-		<p>
-			<div class='wrap'>
-				<div class='right'>
-						Assumindo 1,000,000,000,000,000 palavras/segundo<br />(padrão governo, 1 quatrilhão/seg):<br />
-						<span id="sTimeToGuess2"></span>.
-				</div>
-				<div class='left'>
-						Assumindo 1,000,000,000,000 palavras/segundo<br />(padrão industrial, 1 trilhão/seg):<br />
-						<span id="sTimeToGuess1"></span>.
-				</div>
-			</div>			
-		</p>
-	</section>
+    <input type="checkbox" id="accents" checked="checked" />Remove accents?
+    
+    <input type="checkbox" id="digits" checked="checked" />End with numbers?
+    
+    <input type="checkbox" id="endsymbol" checked="checked" />End with symbol?<br/><br />
+    
+    <input type="button" id="sbmt" value="Generate" onclick="generate();" /><br/><br />
+    
+    <fieldset width="55%" id="options">
+        <legend>Options</legend>
+        <i class="far fa-copy" title="copy" onclick="toClip(1);"></i><input type="text" class="output" id="output1"></input><br/>
+        <i class="far fa-copy" title="copy" onclick="toClip(2);"></i><input type="text" class="output" id="output2"></input><br/>
+        <i class="far fa-copy" title="copy" onclick="toClip(3);"></i><input type="text" class="output" id="output3"></input>
+    </fieldset>
+    <section id="info">
+        <p>
+            <ul>
+                <li>The total entropy of a password with <span id="sWords"></span> words is <span id="sEntropy"></span> bits;</li>
+                <li>The total number of combinations with this number of words is <span id="sWordSpace"></span> (<i>the dictionary contains <span id="sDictLen"></span> words</i>);</li>
+                <li>Time to crack using brute force, investigating 50% of the total combinations</li>
+            </ul>
+        </p>
+        <p>
+            <div class='wrap'>
+                <div class='right'>
+                        Assuming 1,000,000,000,000,000 words/second<br />(government standard, 1 quadrillion/sec):<br />
+                        <span id="sTimeToGuess2"></span>.
+                </div>
+                <div class='left'>
+                        Assuming 1,000,000,000,000 words/second<br />(industry standard, 1 trillion/sec):<br />
+                        <span id="sTimeToGuess1"></span>.
+                </div>
+            </div>            
+        </p>
+    </section>
 
     <p>
-		<hr />
-		<i>Por <a href="mailto:sergiorgiraldo@gmail.com">Sérgio Giraldo</a>, 2019</i><br />
-		<i>Ideia original de Arnold Reinhold: <a href="http://world.std.com/~reinhold/diceware.html" target="_blank">Diceware</a></i>
-	</p>	
+        <hr />
+        <i>Por <a href="mailto:sergiorgiraldo@gmail.com">Sérgio Giraldo</a>, 2019</i><br />
+        <i>Ideia original de Arnold Reinhold: <a href="http://world.std.com/~reinhold/diceware.html" target="_blank">Diceware</a></i>
+    </p>    
 
 </body>
 </html>
